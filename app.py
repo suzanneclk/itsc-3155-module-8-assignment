@@ -13,7 +13,8 @@ def index():
 @app.get('/movies')
 def list_all_movies():
     # TODO: Feature 1
-    return render_template('list_all_movies.html', list_movies_active=True, list=movie_ratings)
+    py_movies = movie_repository_singleton.get_all_movies()
+    return render_template('list_all_movies.html', movies=py_movies, list_movies_active=True)
 
 
 @app.get('/movies/new')
@@ -25,11 +26,12 @@ def create_movies_form():
 def create_movie():
     # TODO: Feature 2
     # these variables are fetched from /movies/new
-    movie = request.args.get('movie')
-    director = request.args.get('director')
-    rating = request.form.get('rating')
-    if (movie != '' and director != ''):
-        movie_ratings[movie] = [director, rating] #adds movie to dictionary, with movie name as key
+    py_movie = request.form.get('movie')
+    py_director = request.form.get('director')
+    py_rating = request.form.get('rating')
+    if (py_movie != '' and py_director != ''):
+        #movie_ratings[movie] = [director, rating] #adds movie to dictionary, with movie name as key
+        movie_repository_singleton.create_movie(py_movie, py_director, py_rating) 
     # After creating the movie in the database, we redirect to the list all movies page
     return redirect('/movies')
 
@@ -38,3 +40,9 @@ def create_movie():
 def search_movies():
     # TODO: Feature 3
     return render_template('search_movies.html', search_active=True)
+
+@app.post('/movies/result')
+def show_result():
+    py_movie = request.form.get('movie-title')
+    py_result =  movie_repository_singleton.get_movie_by_title(py_movie)
+    return render_template('search_result.html', result=py_result, search_active=True)
