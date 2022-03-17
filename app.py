@@ -39,10 +39,6 @@ def create_movie():
 @app.get('/movies/search')
 def search_movies():
     # TODO: Feature 3
-    return render_template('search_movies.html', search_active=True)
-
-@app.post('/movies/result')
-def show_result():
-    py_movie = request.form.get('movie-title')
+    py_movie = request.args.get('movie-title')
     py_result =  movie_repository_singleton.get_movie_by_title(py_movie)
-    return render_template('search_result.html', result=py_result, search_active=True)
+    return render_template('search_movies.html', search_active=True, py_movie = py_movie, py_result = py_result)
