@@ -31,6 +31,7 @@ def create_movie():
     py_rating = request.form.get('rating')
     if (py_movie != '' and py_director != ''):
         #movie_ratings[movie] = [director, rating] #adds movie to dictionary, with movie name as key
+        print(py_movie + " has been entered!")
         movie_repository_singleton.create_movie(py_movie, py_director, py_rating) 
     # After creating the movie in the database, we redirect to the list all movies page
     return redirect('/movies')
@@ -43,6 +44,18 @@ def search_movies():
 
 @app.post('/movies/result')
 def show_result():
+    print("[Searching for movie...]")
     py_movie = request.form.get('movie-title')
     py_result =  movie_repository_singleton.get_movie_by_title(py_movie)
-    return render_template('search_result.html', result=py_result, search_active=True)
+    py_isStr = False
+
+    print(py_result)
+
+    if py_result is None:
+        py_result = "No titles found."
+        py_isStr = True
+        print("No movie of this title has been found.")
+    else:
+        print(py_movie + " has been found!")
+
+    return render_template('search_result.html', result=py_result, isStr=py_isStr, search_active=True)

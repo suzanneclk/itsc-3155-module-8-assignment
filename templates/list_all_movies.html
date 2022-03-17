@@ -3,23 +3,23 @@
 {% block title %}Movie Rating App | All Movies{% endblock %}
 
 {% block body %}
-<h1 class="mb-5">All Movies</h1>
-<p class="mb-3">See our list of movie ratings below</p>
+<h1 class="mb-5" style="color:#70d3ea;">All Movies</h1>
+<p class="mb-3" style="color:silver;">See our list of movie ratings below</p>
 <!-- TODO: Feature 1 -->
-    <table class="table">
+    <table class="table" style="color:silver;">
         <thead>
             <tr>
-                <th>Movie</th>
-                <th>Director</th>
-                <th>Rating</th>
+                <th style="color:silver;">Movie</th>
+                <th style="color:silver;">Director</th>
+                <th style="color:silver;">Rating</th>
             </tr>
         </thead>
         <tbody>
             {% for index in movies %}
             <tr>
-                <td>{{index.title}}</td>
-                <td>{{index.director}}</td>
-                <td>{{index.rating}}</td>
+                <td style="color:silver;">{{index.title}}</td>
+                <td style="color:silver;">{{index.director}}</td>
+                <td style="color:silver;">{{index.rating}}</td>
             </tr>>
             {% endfor %}
         </tbody>
