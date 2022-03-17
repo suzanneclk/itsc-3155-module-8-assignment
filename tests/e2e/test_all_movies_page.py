@@ -1,4 +1,4 @@
 # TODO: Feature 1
-def test_search():
+def test_all_movies_page():
     #get_all_movies
-    assert 2+2 == 4
+    assert 2+2 == 3

@@ -1,4 +1,5 @@
 # TODO: Feature 3
+
 def test_search():
     #assert get_movie_by_title
-    assert 2+2 == 4
+    assert 2+2 == 3
