@@ -28,7 +28,16 @@ def create_movie():
     # these variables are fetched from /movies/new
     py_movie = request.form.get('movie')
     py_director = request.form.get('director')
-    py_rating = request.form.get('rating')
+    py_rating = int(float(request.form.get('rating')))
+
+    if py_rating > 5:
+        if py_rating <= 10:
+            py_rating = int(py_rating/2) 
+        elif py_rating > 10 and py_rating <= 100:
+            py_rating = int(py_rating/20)
+        else:
+            py_rating = 0
+
     if (py_movie != '' and py_director != ''):
         #movie_ratings[movie] = [director, rating] #adds movie to dictionary, with movie name as key
         print(py_movie + " has been entered!")
